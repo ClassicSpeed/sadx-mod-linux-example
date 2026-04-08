@@ -1,20 +1,57 @@
 #include <SADXModLoader.h>
-extern "C"
+
+extern "C" {
+__declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
 {
-    __declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
-    {
-        // Called when the mod initializes.
-        // path points to your mod folder.
-        (void)path;
-        (void)helperFunctions;
-    }
+    // Executed at startup, contains helperFunctions and the path to your mod (useful for getting the config file.)
+    // This is where we override functions, replace static data, etc.
+}
 
-    __declspec(dllexport) void __cdecl OnFrame()
-    {
-        // Simple test: force rings to 999 every frame.
-        Rings = 999;
-    }
+__declspec(dllexport) void __cdecl OnInitEnd()
+{
+    // Executed after every mod has been initialized, mainly used to check if a specific mod is also enabled.
+}
 
-    // Required so Mod Loader recognizes this DLL.
-    __declspec(dllexport) ModInfo SADXModInfo = { ModLoaderVer };
+__declspec(dllexport) void __cdecl OnFrame()
+{
+    Rings = 999;
+    // Executed every running frame of SADX
+}
+
+__declspec(dllexport) void __cdecl OnInput()
+{
+    // Executed before the game processes input
+}
+
+__declspec(dllexport) void __cdecl OnControl()
+{
+    // Executed when the game processes input
+}
+
+__declspec(dllexport) void __cdecl OnRenderDeviceReset()
+{
+    // Executed when the window size changes
+}
+
+__declspec(dllexport) void __cdecl OnRenderDeviceLost()
+{
+    // Executed when the game fails to render the scene
+}
+
+__declspec(dllexport) void __cdecl OnRenderSceneStart()
+{
+    // Executed before the game starts rendering the scene
+}
+
+__declspec(dllexport) void __cdecl OnRenderSceneEnd()
+{
+    // Executed when the game finishes rendering the scene
+}
+
+__declspec(dllexport) void __cdecl OnExit()
+{
+    // Executed when the game is about to terminate
+}
+
+__declspec(dllexport) ModInfo SADXModInfo = {ModLoaderVer}; // This is needed for the Mod Loader to recognize the DLL.
 }
