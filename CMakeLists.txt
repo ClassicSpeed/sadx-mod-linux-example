@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
+
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/mingw32.cmake")
+
 project(MySADXMod LANGUAGES CXX)
 
 add_library(MySADXMod SHARED src/mod.cpp)
