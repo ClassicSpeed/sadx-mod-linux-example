@@ -21,7 +21,7 @@ target_compile_features(MySADXMod PRIVATE cxx_std_17)
 
 target_include_directories(MySADXMod SYSTEM PRIVATE
         ${CMAKE_SOURCE_DIR}/lib/windows-header-fix
-        ${CMAKE_SOURCE_DIR}/lib/sadx-mod-loader/SADXModLoader/include)
+        ${CMAKE_SOURCE_DIR}/lib/sadx-mod-loader-linux-compatible)
 
 
 target_compile_options(MySADXMod PRIVATE
