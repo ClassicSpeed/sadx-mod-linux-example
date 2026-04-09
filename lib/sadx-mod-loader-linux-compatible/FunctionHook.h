@@ -35,7 +35,7 @@ public:
 			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
-		WriteJump(origaddr, hook);
+		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
 	}
 
 	// Call the original function, bypassing the hook.
@@ -106,7 +106,7 @@ public:
 			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
-		WriteJump(origaddr, hook);
+		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
 	}
 
 	// Call the original function, bypassing the hook.
@@ -176,7 +176,7 @@ public:
 			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
-		WriteJump(origaddr, hook);
+		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
 	}
 
 	// Call the original function, bypassing the hook.
@@ -247,7 +247,7 @@ public:
 			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
-		WriteJump(origaddr, hook);
+		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
 	}
 
 	// Call the original function, bypassing the hook.
@@ -317,7 +317,7 @@ public:
 			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
-		WriteJump(origaddr, hook);
+		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
 	}
 
 	// Call the original function, bypassing the hook.
@@ -388,7 +388,7 @@ public:
 			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
-		WriteJump(origaddr, hook);
+		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
 	}
 
 	// Call the original function, bypassing the hook.

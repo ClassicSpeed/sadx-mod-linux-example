@@ -370,7 +370,7 @@ constexpr T const GenerateUsercallWrapper(int ret, intptr_t address, TArgs... ar
 			break;
 		}
 	}
-	WriteCall(&codeData[cdoff], (void*)address);
+	WriteCall(reinterpret_cast<intptr_t>(&codeData[cdoff]), address);
 	cdoff += 5;
 	if (stackcnt > 0)
 		writebytes(codeData, cdoff, 0x83, 0xC4, (uint8_t)(stackcnt * 4));
@@ -645,7 +645,7 @@ constexpr void const GenerateUsercallHook(T func, int ret, intptr_t address, TAr
 			break;
 		}
 	}
-	WriteCall(&codeData[cdoff], func);
+	WriteCall(reinterpret_cast<intptr_t>(&codeData[cdoff]), reinterpret_cast<intptr_t>(func));
 	cdoff += 5;
 	switch (ret)
 	{
@@ -742,9 +742,9 @@ constexpr void const GenerateUsercallHook(T func, int ret, intptr_t address, TAr
 #endif
 	assert(cdoff == memsz);
 	if (*(uint8_t*)address == 0xE8)
-		WriteCall((void*)address, codeData);
+		WriteCall(address, reinterpret_cast<intptr_t>(codeData));
 	else
-		WriteJump((void*)address, codeData);
+		WriteJump(address, reinterpret_cast<intptr_t>(codeData));
 }
 
 template<typename T, typename... TArgs>
@@ -970,7 +970,7 @@ constexpr T const GenerateUserpurgeWrapper(int ret, intptr_t address, TArgs... a
 			break;
 		}
 	}
-	WriteCall(&codeData[cdoff], (void*)address);
+	WriteCall(reinterpret_cast<intptr_t>(&codeData[cdoff]), address);
 	cdoff += 5;
 	for (int i = argc - 1; i >= 0; --i)
 	{
@@ -1243,7 +1243,7 @@ constexpr void const GenerateUserpurgeHook(T func, int ret, intptr_t address, TA
 			break;
 		}
 	}
-	WriteCall(&codeData[cdoff], func);
+	WriteCall(reinterpret_cast<intptr_t>(&codeData[cdoff]), reinterpret_cast<intptr_t>(func));
 	cdoff += 5;
 	switch (ret)
 	{
@@ -1343,9 +1343,9 @@ constexpr void const GenerateUserpurgeHook(T func, int ret, intptr_t address, TA
 #endif
 	assert(cdoff == memsz);
 	if (*(uint8_t*)address == 0xE8)
-		WriteCall((void*)address, codeData);
+		WriteCall(address, reinterpret_cast<intptr_t>(codeData));
 	else
-		WriteJump((void*)address, codeData);
+		WriteJump(address, reinterpret_cast<intptr_t>(codeData));
 }
 
 #define UsercallFunc(RETURN_TYPE, NAME, ARGS, ARGNAMES, ADDRESS, RETURN_LOC, ...) \
@@ -1396,9 +1396,9 @@ private: \
 	uint8_t origdata[5]{}; \
 	const PointerType wrapper = GenerateUsercallWrapper<PointerType>(RETURN_LOC, ADDRESS, __VA_ARGS__); \
  \
-	constexpr PointerType getptr() \
+	constexpr uint8_t* getptr() \
 	{ \
-		return reinterpret_cast<PointerType>(ADDRESS); \
+		return reinterpret_cast<uint8_t*>(ADDRESS); \
 	} \
 }; \
 static _##NAME##_t NAME
@@ -1450,9 +1450,9 @@ private: \
 	uint8_t origdata[5]{}; \
 	const PointerType wrapper = GenerateUsercallWrapper<PointerType>(noret, ADDRESS, __VA_ARGS__); \
  \
-	constexpr PointerType getptr() \
+	constexpr uint8_t* getptr() \
 	{ \
-		return reinterpret_cast<PointerType>(ADDRESS); \
+		return reinterpret_cast<uint8_t*>(ADDRESS); \
 	} \
 }; \
 static _##NAME##_t NAME
@@ -1505,9 +1505,9 @@ private: \
 	uint8_t origdata[5]{}; \
 	const PointerType wrapper = GenerateUserpurgeWrapper<PointerType>(RETURN_LOC, ADDRESS, __VA_ARGS__); \
  \
-	constexpr PointerType getptr() \
+	constexpr uint8_t* getptr() \
 	{ \
-		return reinterpret_cast<PointerType>(ADDRESS); \
+		return reinterpret_cast<uint8_t*>(ADDRESS); \
 	} \
 }; \
 static _##NAME##_t NAME
@@ -1559,9 +1559,9 @@ private: \
 	uint8_t origdata[5]{}; \
 	const PointerType wrapper = GenerateUserpurgeWrapper<PointerType>(noret, ADDRESS, __VA_ARGS__); \
  \
-	constexpr PointerType getptr() \
+	constexpr uint8_t* getptr() \
 	{ \
-		return reinterpret_cast<PointerType>(ADDRESS); \
+		return reinterpret_cast<uint8_t*>(ADDRESS); \
 	} \
 }; \
 static _##NAME##_t NAME

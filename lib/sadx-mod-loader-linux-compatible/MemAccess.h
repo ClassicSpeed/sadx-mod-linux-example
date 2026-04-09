@@ -112,12 +112,6 @@ union JmpCallDwordRel {
 		opcode = isCall ? 0xE8 : 0xE9;
 		address = dst - (src + 5);
 	}
-
-	JmpCallDwordRel(bool isCall, void* src, void* dst)
-	{
-		opcode = isCall ? 0xE8 : 0xE9;
-		address = (intptr_t)dst - ((intptr_t)src + 5);
-	}
 };
 #pragma pack()
 
@@ -127,10 +121,10 @@ union JmpCallDwordRel {
  * @param funcaddress Address to JMP to.
  * @return Nonzero on success; 0 on error (check GetLastError()).
  */
-static inline BOOL WriteJump(void *writeaddress, void *funcaddress)
+static inline BOOL WriteJump(intptr_t writeaddress, intptr_t funcaddress)
 {
 	JmpCallDwordRel data(false, writeaddress, funcaddress);
-	return WriteData(writeaddress, data.u8);
+	return WriteData(reinterpret_cast<void*>(writeaddress), data.u8);
 }
 
 /**
@@ -139,11 +133,12 @@ static inline BOOL WriteJump(void *writeaddress, void *funcaddress)
  * @param funcaddress Address to CALL.
  * @return Nonzero on success; 0 on error (check GetLastError()).
  */
-static inline BOOL WriteCall(void *writeaddress, void *funcaddress)
+static inline BOOL WriteCall(intptr_t writeaddress, intptr_t funcaddress)
 {
 	JmpCallDwordRel data(true, writeaddress, funcaddress);
-	return WriteData(writeaddress, data.u8);
+	return WriteData(reinterpret_cast<void*>(writeaddress), data.u8);
 }
+
 
 #endif
 

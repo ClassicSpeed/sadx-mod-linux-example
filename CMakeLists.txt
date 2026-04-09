@@ -23,11 +23,6 @@ target_include_directories(MySADXMod SYSTEM PRIVATE
         ${CMAKE_SOURCE_DIR}/lib/sadx-mod-loader-linux-compatible)
 
 
-target_compile_options(MySADXMod PRIVATE
-        # Downgrades the function-pointer → void* error inside UsercallFunctionHandler.h
-        # to a warning; the SYSTEM include above then suppresses that warning.
-        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fpermissive>)
-
 
 target_compile_definitions(MySADXMod PRIVATE
         WIN32
