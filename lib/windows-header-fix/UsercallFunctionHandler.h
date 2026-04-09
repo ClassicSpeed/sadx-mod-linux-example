@@ -2,7 +2,6 @@
 
 // Load upstream header first, then patch only problematic macro glue for GCC/MinGW.
 #include "../../lib/sadx-mod-loader/SADXModLoader/include/UsercallFunctionHandler.h"
-#include <stdexcept>
 
 #if !defined(_MSC_VER)
 
@@ -34,8 +33,6 @@ public: \
  \
 	void Hook(PointerType hookfunc) \
 	{ \
-		if (ishooked) \
-			throw std::runtime_error("Attempted to hook already hooked function!"); \
 		memcpy(origdata, getptr(), 5); \
 		GenerateUsercallHook<PointerType>(hookfunc, RETURN_LOC, ADDRESS, __VA_ARGS__); \
 		ishooked = true; \
@@ -91,8 +88,6 @@ public: \
  \
 	void Hook(PointerType hookfunc) \
 	{ \
-		if (ishooked) \
-			throw std::runtime_error("Attempted to hook already hooked function!"); \
 		memcpy(origdata, getptr(), 5); \
 		GenerateUsercallHook<PointerType>(hookfunc, noret, ADDRESS, __VA_ARGS__); \
 		ishooked = true; \
@@ -147,8 +142,6 @@ public: \
  \
 	void Hook(PointerType hookfunc) \
 	{ \
-		if (ishooked) \
-			throw std::runtime_error("Attempted to hook already hooked function!"); \
 		memcpy(origdata, getptr(), 5); \
 		GenerateUserpurgeHook<PointerType>(hookfunc, RETURN_LOC, ADDRESS, __VA_ARGS__); \
 		ishooked = true; \
@@ -204,8 +197,6 @@ public: \
  \
 	void Hook(PointerType hookfunc) \
 	{ \
-		if (ishooked) \
-			throw std::runtime_error("Attempted to hook already hooked function!"); \
 		memcpy(origdata, getptr(), 5); \
 		GenerateUserpurgeHook<PointerType>(hookfunc, noret, ADDRESS, __VA_ARGS__); \
 		ishooked = true; \
