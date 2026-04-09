@@ -1356,7 +1356,7 @@ public: \
  \
 	RETURN_TYPE operator()ARGS \
 	{ \
-		return wrapper##ARGNAMES; \
+		return wrapper ARGNAMES; \
 	} \
  \
 	PointerType operator&() \
@@ -1371,26 +1371,24 @@ public: \
  \
 	void Hook(PointerType hookfunc) \
 	{ \
-		if (ishooked) \
-			throw new std::exception("Attempted to hook already hooked function!"); \
 		memcpy(origdata, getptr(), 5); \
 		GenerateUsercallHook<PointerType>(hookfunc, RETURN_LOC, ADDRESS, __VA_ARGS__); \
 		ishooked = true; \
 	} \
  \
-	RETURN_TYPE Original##ARGS \
+	RETURN_TYPE Original ARGS \
 	{ \
 		if (ishooked) \
 		{ \
 			uint8_t hookdata[5]; \
 			memcpy(hookdata, getptr(), 5); \
 			memcpy(getptr(), origdata, 5); \
-			RETURN_TYPE retval = wrapper##ARGNAMES; \
+			RETURN_TYPE retval = wrapper ARGNAMES; \
 			memcpy(getptr(), hookdata, 5); \
 			return retval; \
 		} \
 		else \
-			return wrapper##ARGNAMES; \
+			return wrapper ARGNAMES; \
 	} \
  \
 private: \
@@ -1413,7 +1411,7 @@ public: \
  \
 	void operator()ARGS \
 	{ \
-		wrapper##ARGNAMES; \
+		wrapper ARGNAMES; \
 	} \
  \
 	PointerType operator&() \
@@ -1428,25 +1426,23 @@ public: \
  \
 	void Hook(PointerType hookfunc) \
 	{ \
-		if (ishooked) \
-			throw new std::exception("Attempted to hook already hooked function!"); \
 		memcpy(origdata, getptr(), 5); \
 		GenerateUsercallHook<PointerType>(hookfunc, noret, ADDRESS, __VA_ARGS__); \
 		ishooked = true; \
 	} \
  \
-	void Original##ARGS \
+	void Original ARGS \
 	{ \
 		if (ishooked) \
 		{ \
 			uint8_t hookdata[5]; \
 			memcpy(hookdata, getptr(), 5); \
 			memcpy(getptr(), origdata, 5); \
-			wrapper##ARGNAMES; \
+			wrapper ARGNAMES; \
 			memcpy(getptr(), hookdata, 5); \
 		} \
 		else \
-			wrapper##ARGNAMES; \
+			wrapper ARGNAMES; \
 	} \
  \
 private: \
@@ -1469,7 +1465,7 @@ public: \
  \
 	RETURN_TYPE operator()ARGS \
 	{ \
-		return wrapper##ARGNAMES; \
+		return wrapper ARGNAMES; \
 	} \
  \
 	PointerType operator&() \
@@ -1484,26 +1480,24 @@ public: \
  \
 	void Hook(PointerType hookfunc) \
 	{ \
-		if (ishooked) \
-			throw new std::exception("Attempted to hook already hooked function!"); \
 		memcpy(origdata, getptr(), 5); \
 		GenerateUserpurgeHook<PointerType>(hookfunc, RETURN_LOC, ADDRESS, __VA_ARGS__); \
 		ishooked = true; \
 	} \
  \
-	RETURN_TYPE Original##ARGS \
+	RETURN_TYPE Original ARGS \
 	{ \
 		if (ishooked) \
 		{ \
 			uint8_t hookdata[5]; \
 			memcpy(hookdata, getptr(), 5); \
 			memcpy(getptr(), origdata, 5); \
-			RETURN_TYPE retval = wrapper##ARGNAMES; \
+			RETURN_TYPE retval = wrapper ARGNAMES; \
 			memcpy(getptr(), hookdata, 5); \
 			return retval; \
 		} \
 		else \
-			return wrapper##ARGNAMES; \
+			return wrapper ARGNAMES; \
 	} \
  \
 private: \
@@ -1526,7 +1520,7 @@ public: \
  \
 	void operator()ARGS \
 	{ \
-		wrapper##ARGNAMES; \
+		wrapper ARGNAMES; \
 	} \
  \
 	PointerType operator&() \
@@ -1541,25 +1535,23 @@ public: \
  \
 	void Hook(PointerType hookfunc) \
 	{ \
-		if (ishooked) \
-			throw new std::exception("Attempted to hook already hooked function!"); \
 		memcpy(origdata, getptr(), 5); \
 		GenerateUserpurgeHook<PointerType>(hookfunc, noret, ADDRESS, __VA_ARGS__); \
 		ishooked = true; \
 	} \
  \
-	void Original##ARGS \
+	void Original ARGS \
 	{ \
 		if (ishooked) \
 		{ \
 			uint8_t hookdata[5]; \
 			memcpy(hookdata, getptr(), 5); \
 			memcpy(getptr(), origdata, 5); \
-			wrapper##ARGNAMES; \
+			wrapper ARGNAMES; \
 			memcpy(getptr(), hookdata, 5); \
 		} \
 		else \
-			wrapper##ARGNAMES; \
+			wrapper ARGNAMES; \
 	} \
  \
 private: \

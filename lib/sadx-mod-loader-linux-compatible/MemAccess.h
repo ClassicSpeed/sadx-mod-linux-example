@@ -49,7 +49,7 @@ static constexpr Tret SizeOfArray(const T(&)[N]) noexcept
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
-#include <Windows.h>
+#include <windows.h>
 
 static inline BOOL WriteData(void *writeaddress, const void *data, SIZE_T datasize)
 {
