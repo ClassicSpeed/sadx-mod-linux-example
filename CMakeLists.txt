@@ -33,10 +33,6 @@ target_compile_definitions(MySADXMod PRIVATE
         WIN32
         _WINDOWS
         _USRDLL
-        # Non-MSVC workaround: SADXVariables.h still references legacy names.
-        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:AnimData=AnimData_t>
-        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:PhysicsData=PhysicsData_t>
-        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:AdventureData=AdventureData_t>
         # Skip GCC-incompatible MSVC inline-asm declarations in function headers.
         SADXMODLOADER_SADXFUNCTIONS_H
         SADXMODLOADER_SADXFUNCTIONSNEW_H
