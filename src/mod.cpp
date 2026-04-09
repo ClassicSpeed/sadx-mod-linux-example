@@ -16,7 +16,7 @@ __declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions&
 // Simple OnFrame test
 __declspec(dllexport) void __cdecl OnFrame()
 {
-    Rings = 999;
+    Rings = 12345;
 }
 
 // UsercallFuncVoid example
