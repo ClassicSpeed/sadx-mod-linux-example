@@ -31,8 +31,6 @@ public:
 	// Apply a hook to the unhooked function.
 	void Hook(FuncType hook)
 	{
-		if (hookaddr)
-			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
 		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
@@ -102,8 +100,6 @@ public:
 	// Apply a hook to the unhooked function.
 	void Hook(FuncType hook)
 	{
-		if (hookaddr)
-			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
 		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
@@ -172,8 +168,6 @@ public:
 	// Apply a hook to the unhooked function.
 	void Hook(FuncType hook)
 	{
-		if (hookaddr)
-			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
 		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
@@ -243,8 +237,6 @@ public:
 	// Apply a hook to the unhooked function.
 	void Hook(FuncType hook)
 	{
-		if (hookaddr)
-			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
 		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
@@ -313,8 +305,6 @@ public:
 	// Apply a hook to the unhooked function.
 	void Hook(FuncType hook)
 	{
-		if (hookaddr)
-			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
 		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));
@@ -384,8 +374,6 @@ public:
 	// Apply a hook to the unhooked function.
 	void Hook(FuncType hook)
 	{
-		if (hookaddr)
-			throw new std::exception("Cannot apply hook to already hooked function!");
 		memcpy(origbytes, origaddr, 5);
 		hookaddr = hook;
 		WriteJump(reinterpret_cast<intptr_t>(origaddr), reinterpret_cast<intptr_t>(hook));

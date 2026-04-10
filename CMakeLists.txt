@@ -18,17 +18,9 @@ add_library(MySADXMod SHARED src/mod.cpp)
 
 target_compile_features(MySADXMod PRIVATE cxx_std_17)
 
+target_include_directories(MySADXMod SYSTEM PRIVATE ${CMAKE_SOURCE_DIR}/lib/sadx-mod-loader-linux-compatible)
 
-target_include_directories(MySADXMod SYSTEM PRIVATE
-        ${CMAKE_SOURCE_DIR}/lib/sadx-mod-loader-linux-compatible)
-
-
-
-target_compile_definitions(MySADXMod PRIVATE
-        WIN32
-        _WINDOWS
-        _USRDLL
-)
+target_compile_definitions(MySADXMod PRIVATE WIN32 _WINDOWS _USRDLL)
 
 target_link_options(MySADXMod PRIVATE -static-libgcc -static-libstdc++)
 
