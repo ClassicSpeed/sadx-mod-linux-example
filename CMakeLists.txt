@@ -28,9 +28,6 @@ target_compile_definitions(MySADXMod PRIVATE
         WIN32
         _WINDOWS
         _USRDLL
-        # Skip GCC-incompatible MSVC inline-asm declarations in function headers.
-        SADXMODLOADER_SADXFUNCTIONS_H
-        SADXMODLOADER_SADXFUNCTIONSNEW_H
 )
 
 target_link_options(MySADXMod PRIVATE -static-libgcc -static-libstdc++)

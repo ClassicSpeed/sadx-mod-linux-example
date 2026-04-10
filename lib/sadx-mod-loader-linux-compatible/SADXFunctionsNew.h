@@ -158,6 +158,7 @@ VoidFunc(CreateSaveData, 0x0042D630);
 FunctionPointer(Uint16, createCRC, (Uint8* data), 0x0042CF90);
 
 static const void* const isTextureNGPtr = (void*)0x403250;
+#ifdef _MSC_VER
 static inline BOOL isTextureNG(NJS_TEXLIST* tl) // Check if the texlist is valid
 {
 	BOOL result;
@@ -181,6 +182,7 @@ static inline void calcModerateVector(NJS_POINT3* vec, Angle3* ang)
 		call calcModerateVectorPtr
 	}
 }
+#endif
 
 // Maths
 StdcallFunctionPointer(Float, njSqrt, (Float n), 0x7871F0);
@@ -331,6 +333,7 @@ TaskFunc(Tikal, 0x7B40C0);
 TaskFunc(EggrobForEvent0, 0x4D3E00);
 
 static const void* const KnucklesCheckInputPtr = (void*)0x476970;
+#ifdef _MSC_VER
 static inline signed int KnucklesCheckInput(taskwk* twp, motionwk2* mwp, playerwk* pwp)
 
 {
@@ -385,6 +388,7 @@ static inline void BigGetFloat(taskwk* twp, playerwk* pwp)
 		call BigGetFloatPtr
 	}
 }
+#endif
 
 // CCL (shape collision)
 FunctionPointer(void, CCL_ClearInfo, (taskwk* twp), 0x418B60);
@@ -481,6 +485,7 @@ FunctionPointer(int, RegisterAnimCallbackFunc, (int(__cdecl* pfunc)(void*, int, 
 FunctionPointer(int, AnimCallbackFunc, (void* phint, int itimer, int* bResume), 0x5FD2E0);
 
 static const void* const calcAimPosPtr = (void*)0x7B1720;
+#ifdef _MSC_VER
 static inline void calcAimPos(taskwk* twp, enemywk* ewp)
 {
 	__asm
@@ -490,6 +495,7 @@ static inline void calcAimPos(taskwk* twp, enemywk* ewp)
 		call calcAimPosPtr
 	}
 }
+#endif
 
 // Boss
 FunctionPointer(bosswk*, BInitialize, (taskwk* twp, unsigned int size), 0x4BD420); // Allocates a bosswk, size is customizable (minimum should be 56)
@@ -501,6 +507,7 @@ FunctionPointer(BOOL, ChkE104ColliLandXZ, (NJS_POINT3* pPos, float fDistChk, flo
 FunctionPointer(task*, SetCircleLimit, (NJS_POINT3* pos, NJS_POINT3* center, float radius), 0x7AF3E0); // Creates an object that limits a position into a circle
 
 static const void* const BSetMotion_NextPtr = (void*)0x4BE170;
+#ifdef _MSC_VER
 static inline void BSetMotion_Next(bosswk* bwp, int patno)
 {
 	__asm
@@ -510,6 +517,7 @@ static inline void BSetMotion_Next(bosswk* bwp, int patno)
 		call BSetMotion_NextPtr
 	}
 }
+#endif
 
 // Level
 VoidFunc(SetTableBG_Chaos0, 0x545CE0);
@@ -519,6 +527,7 @@ VoidFunc(SetTableBG_Chaos6, 0x5577E0);
 VoidFunc(SetTableBG_E101, 0x566AF0);
 
 static const void* const RdHighwayInitPtr = (void*)0x60FF80;
+#ifdef _MSC_VER
 static inline void RdHighwayInit(task* tp)
 {
 	__asm
@@ -567,6 +576,7 @@ static inline void RdMountainInit(task* tp)
 		call RdMountainInitPtr
 	}
 }
+#endif
 
 // Miren functions (utilities)
 FunctionPointer(void, MirenInitTask, (task* task_p, const TaskInfo* info_p, void* param_p), 0x796B30); // Create a task with information from TaskInfo
@@ -747,6 +757,7 @@ FunctionPointer(void, CartInitLetter, (), 0x4DC740);                            
 FunctionPointer(void, cartTopographicalCollision, (task* tp, taskwk* twp), 0x799380); // Ground collision logic for carts
 
 static const void* const setCartDirectionPtr = (void*)0x798050;
+#ifdef _MSC_VER
 static inline void setCartDirection(taskwk* twp, NJS_POINT3* vec)
 {
 	__asm
@@ -839,6 +850,7 @@ static inline void cartShadowPos(taskwk* twp)
 		call cartShadowPosPtr
 	}
 }
+#endif
 
 // Sound (note: "tone" is sound id)
 FunctionPointer(BOOL, Get3Dmode, (), 0x40FF40); // Get3DSoundEnabled
@@ -962,6 +974,7 @@ CamAdjustFunc(AdjustForFreeCamera, 0x468800);
 
 static const void* const CameraViewSetPtr = (void*)0x435600;
 // Apply camera view (view matrix, projection matrix, etc.)
+#ifdef _MSC_VER
 static inline void CameraViewSet(taskwk* twp) 
 {
 	__asm
@@ -1130,6 +1143,7 @@ static inline void DrawShapeMotion(NJS_OBJECT* object, NJS_MOTION* motion, NJS_M
 		add esp, 20
 	}
 }
+#endif
 
 // Quaternion functions
 FunctionPointer(void, njInterpolateQuaternion, (NJS_QUATERNION* q1, NJS_QUATERNION* q2, Float t, NJS_QUATERNION* qd), 0x793790);

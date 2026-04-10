@@ -3000,6 +3000,9 @@ VoidFunc(InitEC3NPCData, 0x7D2CF0);
 VoidFunc(InitSSNPCData, 0x7D5810);
 VoidFunc(al_xy_init, 0x7DAE80);
 
+// MSVC-only __asm wrappers for __usercall helpers.
+// GCC/MinGW cannot parse MSVC inline asm blocks, but the declarations above remain usable.
+#ifdef _MSC_VER
 // Bool __usercall@<eax>(NJS_TEXLIST *a1@<eax>)
 static const void *const VerifyTexListPtr = (void*)0x403250;
 static inline Bool VerifyTexList(NJS_TEXLIST *a1)
@@ -5067,5 +5070,7 @@ static inline int UnpauseAllSounds(int volume_3d)
 	}
 	return result;
 }
+
+#endif // _MSC_VER
 
 #endif /* SADXMODLOADER_SADXFUNCTIONS_H */

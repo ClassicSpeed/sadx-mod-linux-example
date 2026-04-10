@@ -1,12 +1,12 @@
 #include <SADXModLoader.h>
 #include <UsercallFunctionHandler.h>
+#include <SADXFunctions.h>
 
 
 extern "C" {
 void HandleHudDisplayRings(signed int ring_count, unsigned char digits, NJS_SPRITE* hud);
 UsercallFuncVoid(_hudDisplayRingsHook, (signed int ringCount, unsigned char digits, NJS_SPRITE* hud),
                  (ringCount, digits, hud), 0x425960, rEAX, rBL, rESI);
-
 
 __declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions& helperFunctions)
 {
@@ -17,6 +17,7 @@ __declspec(dllexport) void __cdecl Init(const char* path, const HelperFunctions&
 __declspec(dllexport) void __cdecl OnFrame()
 {
     Rings = 12345;
+    DisplayDebugString(NJM_LOCATION(2, 1), "Testing");
 }
 
 // UsercallFuncVoid example
